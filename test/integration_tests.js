@@ -10,7 +10,7 @@ describe('integration tests', function() {
     it('live http request', async() => {
 
         let runDate = new Date(2018, 6, 31);
-        let nbc_config = JSON.parse(fs.readFileSync('test/config_nbc.json'));
+        let nbc_config = JSON.parse(fs.readFileSync('test/config_integration.json'));
         let res = await main.getHttpReport(nbc_config);
 
         assert.equal(res.length > 0, true);
