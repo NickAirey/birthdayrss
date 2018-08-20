@@ -1,7 +1,6 @@
 const assert = require('assert');
 const fs = require('fs');
 const main = require('../main');
-const util = require('util');
 
 describe('integration tests', function() {
 
