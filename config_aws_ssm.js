@@ -1,4 +1,6 @@
-
+/**
+ * Author: Nick Airey
+ */
 
 let AWS = require('aws-sdk');
 

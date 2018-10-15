@@ -1,5 +1,5 @@
 /*
-    Author: Nick Airey
+ * Author: Nick Airey
  */
 
 let axios = require('axios');

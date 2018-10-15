@@ -1,7 +1,5 @@
 /**
- *
  * Author: Nick Airey
- *
  */
 
 let ssm_config = require('config_aws_ssm');
