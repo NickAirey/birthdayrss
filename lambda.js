@@ -4,19 +4,9 @@
  *
  */
 
-let config = require('./config_aws_ssm');
-let main = require('./main');
+let ssm_config = require('config_aws_ssm');
+let main = require('main');
 let util = require('util');
-
-function logError(data) {
-    console.error(util.inspect(data, {showHidden:false, depth:5}));
-    return data;
-}
-
-function logObject(data) {
-    console.log(util.inspect(data, {showHidden:false, depth:5}));
-    return data;
-}
 
 /**
  * AWS API lambda handler
@@ -29,7 +19,7 @@ exports.handler = async (event) => {
         let runDate = new Date();
 
         // get config and use it to get http report
-        let config = await config.getConfig();
+        let config = await ssm_config.getConfig();
         let res = await main.getHttpReport(config);
 
         // extract js results from report, transform report results list into rssItems list
@@ -40,13 +30,12 @@ exports.handler = async (event) => {
         let rssXml = main.rssXmlBuilder(rssItems, config, runDate);
         let result = {"statusCode": 200, "headers": {'Content-Type': 'text/xml'}, "body": rssXml};
 
-        logObject(result);
+        console.log(util.inspect(result, {showHidden:false, depth:5}));
         return result;
     }
     catch(err) {
-        logError(err);
+        console.error(util.inspect(err, {showHidden:false, depth:5}));
         let result = {"statusCode": 503, "body": "error processing request"};
-        logError(result);
         return result;
     }
 };

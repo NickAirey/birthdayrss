@@ -14,12 +14,12 @@ exports.extractJsFromReport = function(htmlReport) {
 exports.getHttpReport = async function(feedConfig) {
 
     const httpClient = axios.create({
-        baseURL: feedConfig['elvanto/reports/report-url'],
+        baseURL: feedConfig['/elvanto/reports/report-url'],
         timeout: 5000,
         maxContentLength: 20000
     });
 
-    let uri = '/report/?id='+ feedConfig['organisation/birthday/elvanto-report-id']+'&authkey='+feedConfig['elvanto/reports/auth-key'];
+    let uri = '/report/?id='+ feedConfig['/organisation/birthday/elvanto-report-id']+'&authkey='+feedConfig['/elvanto/reports/auth-key'];
     const result = await httpClient.get(uri);
     return result.data;
 };
@@ -74,11 +74,11 @@ exports.rssXmlBuilder = function(rssItems, feedConfig, runDate) {
     let root = builder.create('rss')
         .att('version', '2.0').att('xmlns:atom', "http://www.w3.org/2005/Atom")
         .element('channel')
-        .element('title', feedConfig["organisation/general/name"]).up()
-        .element('description', feedConfig["organisation/birthday/feed-description"]).up()
-        .element('link', feedConfig["organisation/general/website-url"]).up()
+        .element('title', feedConfig["/organisation/general/name"]).up()
+        .element('description', feedConfig["/organisation/birthday/feed-description"]).up()
+        .element('link', feedConfig["/organisation/general/website-url"]).up()
         .element('pubDate', runDate.toUTCString()).up()
-        .element('atom:link').att('href', feedConfig["organisation/birthday/feed-url"]).att('rel', 'self').att('type', 'application/rss+xml').up();
+        .element('atom:link').att('href', feedConfig["/organisation/birthday/feed-url"]).att('rel', 'self').att('type', 'application/rss+xml').up();
 
     rssItems.forEach( item => {
         root.element(item);
