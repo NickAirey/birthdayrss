@@ -1,11 +1,11 @@
 {
-  "organisation/general/name": "Example Company",
-  "organisation/general/website-url": "https://example.com",
+  "/organisation/general/name": "Example Company",
+  "/organisation/general/website-url": "https://example.com",
 
-  "organisation/birthday/feed-description": "Example RSS birthday feed",
-  "organisation/birthday/feed-url": "https://example.com/api/birthday/rss.xml",
-  "organisation/birthday/elvanto-report-id": "report1234abcd",
+  "/organisation/birthday/feed-description": "Example RSS birthday feed",
+  "/organisation/birthday/feed-url": "https://example.com/api/birthday/rss.xml",
+  "/organisation/birthday/elvanto-report-id": "report1234abcd",
 
-  "elvanto/reports/report-url": "example.elvanto.com",
-  "elvanto/reports/auth-key": "12345zyx987"
+  "/elvanto/reports/report-url": "example.elvanto.com",
+  "/elvanto/reports/auth-key": "12345zyx987"
 }
