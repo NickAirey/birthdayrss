@@ -36,11 +36,11 @@ describe('result to item', () => {
    it('result to item', ()=> {
 
        let runDate = new Date(2018, 6, 12);
-       let input1 = '{ "cols": [ { "field": "firstname", "data": "Ben", "html": false }, { "field": "lastname","data": "Johnson","html": false },{"field": "birthday_month", "data": "29 July","html": false } ]}';
+       let input1 = '{ "id": 123, "cols": [ { "field": "firstname", "data": "Ben", "html": false }, { "field": "lastname","data": "Johnson","html": false },{"field": "birthday_month", "data": "29 July","html": false } ]}';
 
        let item1Obj = main.reportResultToRssItem(JSON.parse(input1), runDate);
 
-       assert.equal(JSON.stringify(item1Obj), '{"item":{"title":"Ben Johnson","description":"Sunday"}}');
+       assert.equal(JSON.stringify(item1Obj), '{"item":{"title":"Ben Johnson","description":"Sunday 29th","guid":{"@isPermaLink":false,"#text":123}}}');
    });
 });
 
@@ -50,8 +50,8 @@ describe('create xml', () => {
         let rssRef = fs.readFileSync('test/rss.xml', 'utf-8');
 
         var items = [
-            { item: { title: "Ben Johnson", description: "Sunday" }},
-            { item: { title: "Mark Singer", description: "Monday" }}];
+            { item: { title: "Ben Johnson", description: "Sunday 29th", guid: { '@isPermaLink': false, '#text': 123 } }},
+            { item: { title: "Mark Singer", description: "Monday 30th", guid: { '@isPermaLink': false, '#text': 234 } }}];
 
         let config = JSON.parse(fs.readFileSync('test/config_test.json', 'utf-8'));
         let runDate = new Date(2018, 6, 29);

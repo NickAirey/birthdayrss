@@ -36,6 +36,16 @@ exports.getNextDate = function(dayMonthStr, currentDate) {
     }
 };
 
+function getGetOrdinal(n) {
+    if (n === null) {
+        return "";
+    }
+
+    var s=["th","st","nd","rd"],
+        v=n%100;
+    return n+(s[(v-20)%10]||s[v]||s[0]);
+}
+
 /*
    takes a Result object, returns the rssItem object
 
@@ -45,7 +55,8 @@ exports.getNextDate = function(dayMonthStr, currentDate) {
 exports.reportResultToRssItem = function(reportResult, runDate) {
 
     let fullName = ' ';
-    let next_birthday_day = ' ';
+    let next_birthday_day_name = ' ';
+    let next_birthday_day_val = null;
 
     reportResult.cols.forEach( col => {
         switch(col.field) {
@@ -57,12 +68,19 @@ exports.reportResultToRssItem = function(reportResult, runDate) {
                 break;
             case 'birthday_month':
                 let next_birthday_date = exports.getNextDate(col.data, runDate);
-                next_birthday_day = next_birthday_date.toLocaleString('en-us', { weekday: 'long'});
+                next_birthday_day_name = next_birthday_date.toLocaleString('en-us', { weekday: 'long'});
+                next_birthday_day_val = next_birthday_date.toLocaleString('en-us', { day: 'numeric' });
                 break;
         }
     });
 
-    return { item: { title: fullName, description: next_birthday_day } };
+    return {
+        item: {
+            title: fullName,
+            description: next_birthday_day_name + " " + getGetOrdinal(next_birthday_day_val),
+            guid: { '@isPermaLink': false, '#text': reportResult.id }
+        }
+    };
 };
 
 
